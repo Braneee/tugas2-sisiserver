@@ -133,7 +133,7 @@ Berikut langkah-langkah untuk menjalankan project:
 ### 1. Clone Repository
 
 ```bash
-git clone <url-repository>
+git clone (https://github.com/Braneee/tugas2-sisiserver.git)
 cd tugas2-sisiserver
 ```
 
