@@ -20,6 +20,7 @@ Project ini dibuat dengan tujuan untuk:
 simple-lms/
 ├── docker-compose.yml
 ├── Dockerfile
+├── .env
 ├── .env.example
 ├── requirements.txt
 ├── manage.py
@@ -28,15 +29,16 @@ simple-lms/
 │   ├── urls.py
 │   └── wsgi.py
 └── README.md
+```
 ````
 
 ## Teknologi yang Digunakan
 
-* **Python**
-* **Django**
-* **PostgreSQL**
-* **Docker**
-* **Docker Compose**
+- **Python**
+- **Django**
+- **PostgreSQL**
+- **Docker**
+- **Docker Compose**
 
 ## Konfigurasi Services
 
@@ -58,40 +60,36 @@ Konfigurasi environment disimpan pada file `.env.example`.
 
 ```env
 DEBUG=True
-SECRET_KEY=django-insecure-simple-lms-secret-key
-ALLOWED_HOSTS=127.0.0.1,localhost
-
-POSTGRES_DB=simple_lms_db
-POSTGRES_USER=postgres
-POSTGRES_PASSWORD=postgres
-POSTGRES_HOST=db
-POSTGRES_PORT=5432
+SECRET_KEY=django-insecure-change-this-secret-key
+ALLOWED_HOSTS=localhost,127.0.0.1
+DATABASE_URL=postgres://postgres:postgres@database:5432/lms_db
+REDIS_URL=redis://redis:6379/0
 ```
 
 ### Penjelasan Environment Variables
 
-* **DEBUG**
+- **DEBUG**
   Digunakan untuk mengaktifkan mode debug pada Django.
 
-* **SECRET_KEY**
+- **SECRET_KEY**
   Kunci rahasia yang digunakan oleh Django untuk kebutuhan keamanan aplikasi.
 
-* **ALLOWED_HOSTS**
+- **ALLOWED_HOSTS**
   Berisi daftar host yang diizinkan untuk mengakses aplikasi Django.
 
-* **POSTGRES_DB**
+- **POSTGRES_DB**
   Nama database PostgreSQL yang digunakan oleh aplikasi.
 
-* **POSTGRES_USER**
+- **POSTGRES_USER**
   Username untuk mengakses database PostgreSQL.
 
-* **POSTGRES_PASSWORD**
+- **POSTGRES_PASSWORD**
   Password untuk autentikasi database PostgreSQL.
 
-* **POSTGRES_HOST**
+- **POSTGRES_HOST**
   Host database PostgreSQL. Pada Docker Compose, nilainya menggunakan nama service database yaitu `db`.
 
-* **POSTGRES_PORT**
+- **POSTGRES_PORT**
   Port yang digunakan PostgreSQL, secara default adalah `5432`.
 
 ## Konfigurasi Database Django
@@ -142,6 +140,7 @@ cd tugas2-sisiserver
 ```bash
 docker compose build
 ```
+
 ![2f37aa6c-7efa-42ab-9cc2-f7ff7b653be6](https://github.com/user-attachments/assets/b0751471-5d88-49a7-8d31-4973f8ad1625)
 
 ### 3. Jalankan Container
@@ -149,6 +148,7 @@ docker compose build
 ```bash
 docker compose up
 ```
+
 ![adc450ac-97db-4843-98f8-b2bd6f1e03f5](https://github.com/user-attachments/assets/b5c586c9-8e95-48f2-bd77-0e1d809e0092)
 ![7bc437df-4d32-418b-ba55-e27d41d43f50](https://github.com/user-attachments/assets/2fa971ef-6771-4b83-8177-490cf8dd20bc)
 
@@ -159,6 +159,7 @@ Buka terminal baru, kemudian jalankan perintah berikut:
 ```bash
 docker compose run --rm web python manage.py migrate
 ```
+
 ![4ff3de22-368a-40d5-b676-c1343de4429e](https://github.com/user-attachments/assets/a6fa7964-98ad-4969-8a65-2051907ecb7a)
 
 ### 5. Akses Aplikasi
@@ -168,8 +169,8 @@ Setelah container berjalan dengan baik, aplikasi dapat diakses melalui browser p
 ```bash
 http://localhost:8000
 ```
-![28249282-87a6-431d-b430-20cc17a5718b](https://github.com/user-attachments/assets/5054a3ae-ca60-43e8-8f32-8cd727851223)
 
+![28249282-87a6-431d-b430-20cc17a5718b](https://github.com/user-attachments/assets/5054a3ae-ca60-43e8-8f32-8cd727851223)
 
 ## Cara Menghentikan Project
 
@@ -178,6 +179,7 @@ Untuk menghentikan seluruh container, gunakan perintah:
 ```bash
 docker compose down
 ```
+
 ![d89a042b-c439-431d-b1f6-63b575851bb1](https://github.com/user-attachments/assets/558d3d8f-5fd6-4fbb-b355-052d8e3d8679)
 
 Apabila ingin sekaligus menghapus volume yang digunakan, jalankan:
@@ -218,4 +220,3 @@ Jika seluruh konfigurasi berhasil dijalankan, maka hasil yang diharapkan adalah:
 ## Kesimpulan
 
 Project Simple LMS ini menunjukkan implementasi dasar setup environment development menggunakan Docker pada aplikasi Django dengan PostgreSQL. Dengan menggunakan Docker Compose, proses menjalankan aplikasi dan database menjadi lebih terstruktur, konsisten, dan mudah digunakan pada berbagai environment development.
-

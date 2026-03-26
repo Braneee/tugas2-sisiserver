@@ -1,24 +1,46 @@
-version: "3.9"
+version: "3.8"
 
 services:
   web:
     build: .
-    container_name: simple_lms_web
-    command: python manage.py runserver 0.0.0.0:8000
-    volumes:
-      - .:/app
+    container_name: simple_lms
+    command: sh -c "python manage.py migrate && gunicorn --bind 0.0.0.0:8000 config.wsgi:application"
     ports:
       - "8000:8000"
     env_file:
-      - .env.example
+      - .env
+    volumes:
+      - .:/app
     depends_on:
-      - db
+      database:
+        condition: service_healthy
+    networks:
+      - lms-network
 
-  db:
-    image: postgres:16
-    container_name: simple_lms_db
-    restart: always
-    env_file:
-      - .env.example
-    ports:
-      - "5432:5432"
+  database:
+    image: postgres:15-alpine
+    container_name: lms_database
+    environment:
+      POSTGRES_DB: lms_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d lms_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      lms-network:
+        aliases:
+          - db
+          - postgres
+          - database
+
+volumes:
+  postgres_data:
+
+networks:
+  lms-network:
+    driver: bridge
