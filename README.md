@@ -99,16 +99,20 @@ Project ini menggunakan PostgreSQL sebagai database utama. Konfigurasi database 
 Contoh konfigurasi:
 
 ```python
-DATABASES = {
-    "default": {
+DATABASE_URL = os.getenv("DATABASE_URL")
+if DATABASE_URL:
+    default_db = parse_database_url(DATABASE_URL)
+else:
+    default_db = {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.getenv("POSTGRES_DB", "simple_lms_db"),
-        "USER": os.getenv("POSTGRES_USER", "postgres"),
-        "PASSWORD": os.getenv("POSTGRES_PASSWORD", "postgres"),
-        "HOST": os.getenv("POSTGRES_HOST", "db"),
-        "PORT": os.getenv("POSTGRES_PORT", "5432"),
+        "NAME": os.getenv("DB_NAME", "lms_db"),
+        "USER": os.getenv("DB_USER", "postgres"),
+        "PASSWORD": os.getenv("DB_PASSWORD", "postgres"),
+        "HOST": os.getenv("DB_HOST", "database"),
+        "PORT": os.getenv("DB_PORT", "5432"),
     }
-}
+
+DATABASES = {"default": default_db}
 ```
 
 Konfigurasi tersebut memungkinkan Django terhubung dengan database PostgreSQL yang berjalan pada container `db`.
