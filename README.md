@@ -131,7 +131,7 @@ Berikut langkah-langkah untuk menjalankan project:
 ### 1. Clone Repository
 
 ```bash
-git clone (https://github.com/Braneee/tugas2-sisiserver.git)
+git clone https://github.com/Braneee/tugas2-sisiserver.git
 cd tugas2-sisiserver
 ```
 
@@ -140,37 +140,22 @@ cd tugas2-sisiserver
 ```bash
 docker compose build
 ```
-
-![2f37aa6c-7efa-42ab-9cc2-f7ff7b653be6](https://github.com/user-attachments/assets/b0751471-5d88-49a7-8d31-4973f8ad1625)
+![20de4178-c830-4f33-bada-0b0af98f914a](https://github.com/user-attachments/assets/09c3cc37-ec24-4e6c-a067-5b860ce8127d)
 
 ### 3. Jalankan Container
 
 ```bash
 docker compose up
 ```
+![83c8c338-4c6c-41c9-8891-cd1947595149](https://github.com/user-attachments/assets/9c7d0c6a-de8b-4e58-8771-808c50a9d0e4)
 
-![adc450ac-97db-4843-98f8-b2bd6f1e03f5](https://github.com/user-attachments/assets/b5c586c9-8e95-48f2-bd77-0e1d809e0092)
-![7bc437df-4d32-418b-ba55-e27d41d43f50](https://github.com/user-attachments/assets/2fa971ef-6771-4b83-8177-490cf8dd20bc)
-
-### 4. Jalankan Migration Database
-
-Buka terminal baru, kemudian jalankan perintah berikut:
-
-```bash
-docker compose run --rm web python manage.py migrate
-```
-
-![4ff3de22-368a-40d5-b676-c1343de4429e](https://github.com/user-attachments/assets/a6fa7964-98ad-4969-8a65-2051907ecb7a)
-
-### 5. Akses Aplikasi
+### 4. Akses Aplikasi
 
 Setelah container berjalan dengan baik, aplikasi dapat diakses melalui browser pada alamat berikut:
 
 ```bash
 http://localhost:8000
 ```
-
-![28249282-87a6-431d-b430-20cc17a5718b](https://github.com/user-attachments/assets/5054a3ae-ca60-43e8-8f32-8cd727851223)
 
 ## Cara Menghentikan Project
 
@@ -188,21 +173,6 @@ Apabila ingin sekaligus menghapus volume yang digunakan, jalankan:
 docker compose down -v
 ```
 
-## Perintah Tambahan (Jika Dibutuhkan)
-
-### Membuat Superuser
-
-```bash
-docker compose run --rm web python manage.py createsuperuser
-```
-
-### Membuat Migration Baru
-
-```bash
-docker compose run --rm web python manage.py makemigrations
-docker compose run --rm web python manage.py migrate
-```
-
 ## Hasil yang Diharapkan
 
 Jika seluruh konfigurasi berhasil dijalankan, maka hasil yang diharapkan adalah:
@@ -215,7 +185,7 @@ Jika seluruh konfigurasi berhasil dijalankan, maka hasil yang diharapkan adalah:
 
 ## Screenshot Django Welcome Page
 
-![28249282-87a6-431d-b430-20cc17a5718b](https://github.com/user-attachments/assets/b34426c0-593c-4547-a2db-9573b9fc4cfd)
+![1bcf423d-11de-4c15-811f-413853559dcf](https://github.com/user-attachments/assets/5c2cbdaa-febf-481e-ae6c-6e747a81c47f)
 
 ## Kesimpulan
 
